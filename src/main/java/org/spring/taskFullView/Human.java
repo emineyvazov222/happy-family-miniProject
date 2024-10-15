@@ -1,6 +1,7 @@
 package org.spring.taskFullView;
 
 import java.util.Arrays;
+import java.util.Map;
 import java.util.Objects;
 
 
@@ -10,7 +11,7 @@ public class Human {
     private int year;
     private int iq;
     private Family family;
-    private String[][] schedule;
+    private Map<DayOfWeek, String> schedule;
 
     public Human() {
     }
@@ -28,7 +29,7 @@ public class Human {
 
     }
 
-    public Human(String name, String surname, int year, int iq, String[][] schedule) {
+    public Human(String name, String surname, int year, int iq, Map<DayOfWeek, String>  schedule) {
         this.name = name;
         this.iq = iq;
         this.schedule = schedule;
@@ -62,11 +63,11 @@ public class Human {
     }
 
 
-    public String[][] getSchedule() {
+    public Map<DayOfWeek, String>  getSchedule() {
         return schedule;
     }
 
-    public void setSchedule(String[][] schedule) {
+    public void setSchedule(Map<DayOfWeek, String>  schedule) {
         this.schedule = schedule;
     }
 
@@ -101,14 +102,19 @@ public class Human {
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, surname, year, iq, family, Arrays.deepHashCode(schedule));
+        return Objects.hash(name, surname, year, iq, family, schedule);
     }
 
     @Override
     public String toString() {
         return "Human{name='" + name + "', surname='" + surname + "', year=" + year + ", iq=" + iq +
-                ", schedule=" + Arrays.deepToString(schedule) +
+                ", schedule=" + schedule +
                 "}";
     }
 
+
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize();
+    }
 }
